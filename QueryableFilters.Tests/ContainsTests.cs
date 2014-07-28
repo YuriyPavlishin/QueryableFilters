@@ -14,8 +14,19 @@ namespace QueryableFilters.Tests
         {
             var filterValue = "test";
 
-            var correct = Context.Set<Supplier>().Where(x => x.ContactName.Contains(filterValue)).ToString();
-            var tested = Context.Set<Supplier>().FilterContains(x => x.ContactName, filterValue).ToString();
+            var correct = Context.Set<Employee>().Where(x => x.Title.Contains(filterValue)).ToString();
+            var tested = Context.Set<Employee>().FilterContains(x => x.Title, filterValue).ToString();
+
+            Assert.AreEqual(correct, tested);
+        }
+
+        [TestMethod]
+        public void ContainsCompositeNotNull()
+        {
+            var filterValue = "test";
+
+            var correct = Context.Set<Employee>().Where(x => (x.FirstName + " " + x.LastName).Contains(filterValue)).ToString();
+            var tested = Context.Set<Employee>().FilterContains(x => x.FirstName + " " + x.LastName, filterValue).ToString();
 
             Assert.AreEqual(correct, tested);
         }
@@ -23,8 +34,8 @@ namespace QueryableFilters.Tests
         [TestMethod]
         public void ContainsNullNotSkipEmptyArgs()
         {
-            var correct = Context.Set<Supplier>().Where(x => x.ContactName == null).ToString();
-            var tested = Context.Set<Supplier>().FilterContains(x => x.ContactName, null, false).ToString();
+            var correct = Context.Set<Employee>().Where(x => x.Title == null).ToString();
+            var tested = Context.Set<Employee>().FilterContains(x => x.Title, null, false).ToString();
 
             Assert.AreEqual(correct, tested);
         }

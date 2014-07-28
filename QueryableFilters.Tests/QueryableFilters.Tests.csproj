@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="EqualTests.cs" />
+    <Compile Include="Examples\Usage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DateRangeTests.cs" />
     <Compile Include="ContainsTests.cs" />
