@@ -1,0 +1,16 @@
+alter table Employees
+	add EmployeeType1 int null
+GO
+
+update Employees
+set EmployeeType1 = (EmployeeID % 3) + 1
+
+GO
+
+alter table Employees
+	alter column EmployeeType1 int not null
+GO
+
+alter table Employees
+	add EmployeeType2 int null
+GO
