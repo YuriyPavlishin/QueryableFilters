@@ -127,7 +127,7 @@ namespace QueryableFilters.Tests
             var filterValue = Enums.EmployeeTypes.Type1;
             /*
                 var correct = Context.Set<Employee>().Where(x => x.EmployeeType1 == filterValue).Select(x => x.EmployeeID).ToString();
-                standard method generate query with cast for enum
+                standard method generate query with cast for enums field
               
                 SELECT 
                 [Extent1].[EmployeeID] AS [EmployeeID]
@@ -147,7 +147,7 @@ namespace QueryableFilters.Tests
             var filterValue = Enums.EmployeeTypes.Type1;
             /*
                 var correct = Context.Set<Employee>().Where(x => x.EmployeeType2 == filterValue).Select(x => x.EmployeeID).ToString();
-                standard method generate query with cast for enum
+                standard method generate query with cast for enums field
               
                 SELECT 
                 [Extent1].[EmployeeID] AS [EmployeeID]

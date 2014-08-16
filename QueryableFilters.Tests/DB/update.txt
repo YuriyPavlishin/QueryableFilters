@@ -14,3 +14,7 @@ GO
 alter table Employees
 	add EmployeeType2 int null
 GO
+
+alter table Employees
+	add EmployeeType1 int null
+GO

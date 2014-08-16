@@ -67,34 +67,31 @@ namespace QueryableFilters
                                                                             Expression<Func<T, DateTime>> field,
                                                                             DateTime? from, DateTime? to, bool ignoreTime = true)
         {
-            return FilterDateRangeInner(qSource, field, from, to, ignoreTime);
+            return qSource.FilterDateRangeInner(field, from, to, ignoreTime);
         }
 
         public static IQueryable<T> FilterDateRange<T>(this IQueryable<T> qSource,
                                                                             Expression<Func<T, DateTime?>> field,
                                                                             DateTime? from, DateTime? to, bool ignoreTime = true)
         {
-            return FilterDateRangeInner(qSource, field, from, to, ignoreTime);
+            return qSource.FilterDateRangeInner(field, from, to, ignoreTime);
         }
 
-        private static IQueryable<T> FilterDateRangeInner<T, TValue>(this IQueryable<T> qSource,
-                                                                            Expression<Func<T, TValue>> field,
-                                                                            DateTime? from, DateTime? to, bool ignoreTime = true)
+        public static IQueryable<T> FilterOnDate<T>(this IQueryable<T> qSource,
+                                                                            Expression<Func<T, DateTime>> field,
+                                                                            DateTime? date)
         {
-            if (from == null && to == null)
-                return qSource;
-
-            if (from != null)
-            {
-                qSource = qSource.ApplyWhereDateGreaterThanOrEqual(field, from.Value, ignoreTime);
-            }
-            if (to != null)
-            {
-                qSource = qSource.ApplyWhereDateLessThan(field, to.Value, ignoreTime);
-            }
-
-            return qSource;
+            return qSource.FilterOnDateInner(field, date);
         }
+
+        public static IQueryable<T> FilterOnDate<T>(this IQueryable<T> qSource,
+                                                                            Expression<Func<T, DateTime?>> field,
+                                                                            DateTime? date)
+        {
+            return qSource.FilterOnDateInner(field, date);
+        }
+
+        
 
 
         public static IQueryable<T> FilterDateRange<T, TValueFrom, TValueTo>(this IQueryable<T> qSource,
