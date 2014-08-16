@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QueryableFilters.Tests.DataContext;
 
 namespace QueryableFilters.Tests.Examples
@@ -43,6 +41,13 @@ namespace QueryableFilters.Tests.Examples
                 qEmployee = qEmployee.Where(x => x.CreatedDate < createdTo);
             }
 
+            if (args.HireOnDate != null)
+            {
+                var hireOnDateFrom = args.HireOnDate.Value.Date;
+                var hireOnDateTo = hireOnDateFrom.AddDays(1);
+                qEmployee = qEmployee.Where(x => x.HireDate >= hireOnDateFrom && x.HireDate < hireOnDateTo);
+            }
+
             return qEmployee.ToList();
         }
 
@@ -55,6 +60,7 @@ namespace QueryableFilters.Tests.Examples
                     .FilterEquals(x => x.EmployeeType1, args.EmployeeTypes1)
                     .FilterEquals(x => x.ReportsTo, args.ReportsTo)
                     .FilterDateRange(x => x.CreatedDate, args.CreatedFrom, args.CreatedTo)
+                    .FilterOnDate(x => x.HireDate, args.HireOnDate)
                     .ToList();
         }
 
@@ -65,6 +71,8 @@ namespace QueryableFilters.Tests.Examples
             public int? ReportsTo { get; set; }
             public DateTime? CreatedFrom { get; set; }
             public DateTime? CreatedTo { get; set; }
+
+            public DateTime? HireOnDate { get; set; }
         }
     }
 }
